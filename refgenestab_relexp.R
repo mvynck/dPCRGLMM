@@ -50,7 +50,7 @@ calc.stab.relexp <- function(glmm.df){
 	}
 
 	# calculate reference gene stability
-	ref.stab <- rowSums(var.est,na.rm=TRUE)
+	ref.stab <- rowSums(var.est,na.rm=TRUE)/(n-1)
 	ref.df <- data.frame(gene=unique(glmm.df$gene),stability=ref.stab)
 	
 	# final stability: sorted from most stable to least stable
@@ -106,7 +106,7 @@ glmm.df <- data.frame(pos=pos.droplets,neg=neg.droplets,gene=factor(gene),sample
 # ready to calculate stability!
 (stab <- calc.stab.relexp(glmm.df))
 
-# ordered from most to least stable: 4 - 3 - 2 -1
+# ordered from most to least stable: 4 - 3 - 2 - 1
 
 # what happens if e.g. gene 3 in sample 2 has a highly variable positive copy number count?
 # let's change the third last number (that is gene 3, sample 2, replicate 2) to 4000 positive copies
