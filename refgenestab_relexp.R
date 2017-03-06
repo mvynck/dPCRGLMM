@@ -41,7 +41,7 @@ calc.stab.relexp <- function(glmm.df){
 			glmm.df.subset <- glmm.df[glmm.df$gene%in%unique(glmm.df$gene)[c(i,j)],]
 			fit <- glmer(matrix(c(pos,neg),ncol=2)~1+				#intercept
 					dummy(gene,unique(gene)[1])+					#relative expression
-					#(1|well)+										#replicate effect
+					(1|well)+										#replicate effect
 					(1|sample),										#sample effect
 					data=glmm.df.subset,family=binomial(cloglog), nAGQ=1, verbose=F)
 			var.est[i,j]<-vcov(fit)[2,2]
